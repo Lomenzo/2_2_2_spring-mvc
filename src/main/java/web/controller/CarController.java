@@ -11,6 +11,7 @@ import web.model.Car;
 import java.util.ArrayList;
 import java.util.List;
 
+//1. Создайте еще один контроллер, замаппленный на /cars.
 @Controller
 public class CarController {
 
@@ -19,6 +20,7 @@ public class CarController {
 
     @GetMapping(value = "/")
     public String getCars(ModelMap model) {
+        //3. Создайте список из 5 машин.
         List<Car> cars = new ArrayList<>();
         cars.add(new Car("Porsche", 911, "Red"));
         cars.add(new Car("Porsche", 914, "White"));
@@ -26,19 +28,17 @@ public class CarController {
         cars.add(new Car("Peugeot", 206, "Blue"));
         cars.add(new Car("MitsubishiLancer", 8, "Yellow"));
 
-        List<String> messages = new ArrayList<>();
+        //4. Создайте сервис с методом, который будет возвращать указанное число машин из созданного списка.
+        List<Car> finalCarList = service.getCarsFromList(2, cars);
 
-        /*AnnotationConfigApplicationContext context =
-                new AnnotationConfigApplicationContext(WebConfig.class);
-        Service service = context.getBean(Service.class);*/
-        List<Car> processedCarList = service.getCarsFromList(2, cars);
-        for (Car car : cars) {
+
+        List<String> messages = new ArrayList<>();
+        for (Car car : finalCarList) {
             messages.add(car.getManufacturer() + car.getSeries() + car.getColor());
             }
 
         model.addAttribute("messages", messages);
 
-        //model.addAttribute("cars", cars);
         return "index";
     }
 }

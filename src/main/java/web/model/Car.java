@@ -4,7 +4,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class Car {
-
+//2. —оздайте модель Car с трем€ произвольными пол€ми.
     private String manufacturer;
 
     private int series;
